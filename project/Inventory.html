@@ -28,6 +28,61 @@
             padding: 20px;
         }
 
+        .dropdown{
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-content{
+            display: none;
+            background-color: #f9f9f9;
+            width: 100%;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            padding-left: 40px; /* Indent dropdown items */
+        }
+
+        .dropdown-content a:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        .dropdown > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .dropdown > a::after {
+            content: "▼";
+            font-size: 0.8em;
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown.active > a::after{
+            transform: rotate(180deg);
+        }
+
+        .dropdown.active > a, 
+        .dropdown:hover > a {
+            background-color: blue;
+            color: white;
+        }
+
         /* Keep the user icon in the top-right corner */
         .header {
             display: flex;
@@ -319,7 +374,12 @@
                 <a class="home-link" href="Dashboard.html">Home</a>
                 <a href="products.html">Products</a>
                 <a href="Customers.html">Customers</a>
-                <a href="Inventory.html">Inventory</a>
+                <div class="dropdown" id="inventorydropdown">
+                    <a onclick="toggleDropDown(event)">Inventory</a>
+                    <div class="dropdown-content">
+                        <a href="Supplier.html">Supplier</a>
+                    </div>
+                </div>
                 <a href="Sales.html">Sales</a>
                 <a href="Archives.html">Archives</a>
                 <!-- Move the Log out link to the bottom -->
@@ -434,5 +494,28 @@
     </main>
 
     <script src="scriptForTime.js"></script>
+    <script>
+        
+        function toggleDropDown(event){
+            event.preventDefault();
+            const dropdown = event.target.closest('.dropdown');
+            dropdown.classList.toggle('active');
+
+            document.querySelectorAll('.dropdown').forEach(otherDropdown=> {
+                if(otherDropdown !== dropdown){
+                    otherDropdown.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('click', function(event){
+            if(!event.target.closest('.dropdown')){
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+    </script>
 </body>
 </html>
