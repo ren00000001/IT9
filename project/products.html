@@ -28,6 +28,63 @@
             padding: 20px;
         }
 
+        .dropdown{
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-content{
+            display: none;
+            background-color: #f9f9f9;
+            width: 100%;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            padding-left: 40px; /* Indent dropdown items */
+        }
+
+        .dropdown-content a:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        .dropdown > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .dropdown > a::after {
+            content: "▼";
+            font-size: 0.8em;
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown.active > a::after{
+            transform: rotate(180deg);
+        }
+
+        .dropdown.active > a, 
+        .dropdown:hover > a {
+            background-color: blue;
+            color: white;
+        }
+
+
+
         /* Keep the user icon in the top-right corner */
         .header{
             display: flex;
@@ -462,7 +519,7 @@
         }
 
         #edit-action-button:hover{
-            background-color: rgba(248, 219, 54, 0.1);
+            background-color: rgba(242, 210, 32, 0.2);
             color: goldenrod;
         }
 
@@ -476,7 +533,7 @@
         }
 
         #table-editaction-button:hover{
-            background-color: rgba(248, 219, 54, 0.1);
+            background-color: rgba(242, 210, 32, 0.2);
         }
 
         #table-deleteaction-button:hover{
@@ -500,15 +557,113 @@
 
         .form-add-content, .form-edit-content{
             background-color: whitesmoke;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             width: 90%;
-            max-width: 400px;
+            max-width: 700px;
+            min-height: 500px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        .close-addform-button, .close-editform-button{
+        .form-add-content h2,
+        .form-edit-content h2{
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-add-content form,
+        .form-edit-content form {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+        }
+
+        .image-upload-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 250px; /* Set a minimum width for the image section */
+        }
+
+        .form-fields-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Image Upload Styles */
+         .image-upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .image-preview-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #7f8c8d;
+            overflow: hidden;
+            flex: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .image-preview-placeholder:hover {
+            border-color: #3498db;
+            background-color: #f0f8ff;
+        }
+
+        .image-preview-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .file-info {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .image-upload-container input[type="file"] {
+            display: none;
+        }
+
+        /* Form Fields Styling */
+        .form-fields-section label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-fields-section input,
+        .form-fields-section select,
+        .form-fields-section textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        /* Close Button */
+        .close-addform-button,
+        .close-editform-button {
             position: absolute;
             top: 10px;
             right: 15px;
@@ -517,10 +672,11 @@
             color: #333;
         }
 
-        .close-addform-button:hover, .close-editform-button:hover{
+        .close-addform-button:hover,
+        .close-editform-button:hover {
             color: #000;
         }
-
+        
         form{
             display: flex;
             flex-direction: column;
@@ -589,10 +745,33 @@
             box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
         }
 
-        .addform-button, .editform-button{
+        .addform-button,
+        .editform-button {
             display: flex;
-            gap: 265px;
-            margin-top: 10px;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .addform-button button,
+        .editform-button button {
+            padding: 10px 20px;
+            background-color: rgb(22, 22, 22);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 48%;
+        }
+
+        .addform-button button:hover,
+        .editform-button button:hover {
+            background-color: rgb(60, 59, 59);
+        }
+
+        input[type="file"] {
+            margin-bottom: 0;
         }
 
         /*Form------------------------------------------------------*/
@@ -616,10 +795,14 @@
                 <a class="home-link" href="Dashboard.html">Home</a>
                 <a href="products.html">Products</a>
                 <a href="Customers.html">Customers</a>
-                <a href="Inventory.html">Inventory</a>
+                <div class="dropdown" id="inventorydropdown">
+                    <a onclick="toggleDropDown(event)">Inventory</a>
+                    <div class="dropdown-content">
+                        <a href="Supplier.html">Supplier</a>
+                    </div>
+                </div>
                 <a href="Sales.html">Sales</a>
                 <a href="Archives.html">Archives</a>
-                <a href="Settings.html">Settings</a>
                 <!-- Move the Log out link to the bottom -->
                 <a class="logout-link" href="Login.html">Log out</a>
             </div>
@@ -781,84 +964,110 @@
                 </div>
 
                 <!--Add Form------------------------------------------------------------------->
-                    <div id="floating-add-form" class="floating-add-form">
-                        <div class="form-add-content">
+                <div id="floating-add-form" class="floating-add-form">
+                    <div class="form-add-content">
 
-                            <span id="close-addform-button" class="close-addform-button">&times;</span>
+                        <span id="close-addform-button" class="close-addform-button">&times;</span>
 
-                            <h2>Add New Product</h2>
-                            <form action="#">
+                        <h2>Add New Product</h2>
+
+                        <form action="#">
+
+                           <div class="image-upload-section">
                                 <label for="product-image">Product Image:</label>
-                                <input type="file" id="product-image" name="product-image" accept="image/*">
-
-                                <label for="addproduct-name">Name:</label>
-                                <input type="text" id="addproduct-name" name="addproduct-name" required>
-
-                                <label for="addproduct-category">Category:</label>
-                                <select name="addproduct-category" id="addproduct-category" class="category-option" required>
-                                    <option>OKE</option>
-                                    <option>OKE</option>
-                                    <option>OKE</option>
-                                </select>
-
-                                <label for="addproduct-stock">Stock:</label>
-                                <input type="number" id="addproduct-stock" name="addproduct-stock" required>
-
-                                <label for="addproduct-price">Price:</label>
-                                <input type="number" id="addproduct-price" name="addproduct-price" required>
-
-                                <label for="addproduct-calendar">Date Added:</label>
-                                <input type="date" id="addproduct-calendar" name="addproduct-calendar" required>
-
-                                <div class="addform-button">
-                                    <button type="submit">Add</button>
-                                    <button type="reset">Reset</button>
+                                <div class="image-upload-container">
+                                    <div class="image-preview-placeholder" id="image-preview-placeholder">
+                                        <span>+ Upload Image</span>
+                                    </div>
+                                    <input type="file" id="product-image" name="product-image" accept="image/*">
+                                    <div class="file-info">Max file size: 2MB. Supported formats: JPG, PNG, WebP</div>
                                 </div>
-                            </form>
+                           </div>
 
-                        </div>
+                           <div class="form-fields-section">
+                                
+                            <label for="addproduct-name">Name:</label>
+                            <input type="text" id="addproduct-name" name="addproduct-name" required>
+
+                            <label for="addproduct-category">Category:</label>
+                            <select name="addproduct-category" id="addproduct-category" class="category-option" required>
+                                <option>OKE</option>
+                                <option>OKE</option>
+                                <option>OKE</option>
+                            </select>
+
+                            <label for="addproduct-stock">Stock:</label>
+                            <input type="number" id="addproduct-stock" name="addproduct-stock" required>
+
+                            <label for="addproduct-price">Price:</label>
+                            <input type="number" id="addproduct-price" name="addproduct-price" required>
+
+                            <label for="addproduct-calendar">Date Added:</label>
+                            <input type="date" id="addproduct-calendar" name="addproduct-calendar" required>
+
+                            <div class="addform-button">
+                                <button type="submit">Add</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                           </div>
+
+                        </form>
+
                     </div>
+                </div>
                 <!--Add Form------------------------------------------------------------------->
 
                 <!--Edit Form------------------------------------------------------------------>
-                    <div id="floating-edit-form" class="floating-edit-form">
-                        <div class="form-edit-content">
+                <div id="floating-edit-form" class="floating-edit-form">
+                    <div class="form-edit-content">
 
-                            <span id="close-editform-button" class="close-editform-button">&times;</span>
+                        <span id="close-editform-button" class="close-editform-button">&times;</span>
 
-                            <h2>Update Product's Information</h2>
-                            <form action="#">
+                        <h2>Update Product's Information</h2>
+
+                        <form action="#">
+                            <div class="image-upload-section">
                                 <label for="edit-product-image">Product Image:</label>
-                                <input type="file" id="edit-product-image" name="edit-product-image" accept="image/*">
-
-                                <label for="editproduct-id">ID</label>
-                                <input type="number" name="editproduct-id" id="editproduct-id" readonly>
-        
-                                <label for="editproduct-name">Name:</label>
-                                <input type="text" name="editproduct-name" id="editproduct-name">
-        
-                                <label for="editproduct-category">Category:</label>
-                                <select name="editproduct-category" id="editproduct-category">
-                                    <option>OKE</option>
-                                    <option>OKE</option>
-                                    <option>OKE</option>
-                                </select>
-        
-                                <label for="editproduct-stock">Stock:</label>
-                                <input type="number" name="editproduct-stock" id="editproduct-stock" required>
-        
-                                <label for="editproduct-price">Price:</label>
-                                <input type="number" name="editproduct-price" id="editproduct-price">
-        
-                                <div class="editform-button">
-                                    <button type="submit">Update</button>
-                                    <button type="reset">Reset</button>
+                                <div class="image-upload-container">
+                                    <div class="image-preview-placeholder" id="edit-image-preview-placeholder">
+                                        <span>+ Upload Image</span>
+                                    </div>
+                                    <input type="file" id="edit-product-image" name="edit-product-image" accept="image/*">
+                                    <div class="file-info">Max file size: 2MB. Supported formats: JPG, PNG, WebP</div>
                                 </div>
-                            </form>
+                            </div>
 
-                        </div>
+                            <div class="form-fields-section">
+                                
+                            <label for="editproduct-id">ID</label>
+                            <input type="number" name="editproduct-id" id="editproduct-id" readonly>
+    
+                            <label for="editproduct-name">Name:</label>
+                            <input type="text" name="editproduct-name" id="editproduct-name">
+    
+                            <label for="editproduct-category">Category:</label>
+                            <select name="editproduct-category" id="editproduct-category">
+                                <option>OKE</option>
+                                <option>OKE</option>
+                                <option>OKE</option>
+                            </select>
+    
+                            <label for="editproduct-stock">Stock:</label>
+                            <input type="number" name="editproduct-stock" id="editproduct-stock" required>
+    
+                            <label for="editproduct-price">Price:</label>
+                            <input type="number" name="editproduct-price" id="editproduct-price">
+    
+                            <div class="editform-button">
+                                <button type="submit">Update</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                            </div>
+
+                        </form>
+
                     </div>
-                    
+                </div>         
                 <!--Edit Form------------------------------------------------------------------>
 
             </div>
@@ -867,112 +1076,94 @@
     </main>
 
     <script src="scriptForTime.js"></script>
+    <script src="suppliertoggle.js"></script>
 
     <script>
+ // Image preview functionality for both forms
+ function setupImagePreview(formId, previewId, inputId) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            
+            const preview = document.getElementById(previewId);
+            const input = document.getElementById(inputId);
+            
+            // Click on placeholder triggers file input
+            preview.addEventListener('click', () => {
+                input.click();
+            });
+            
+            // Handle file selection
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Validate file size (2MB max)
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('File size exceeds 2MB limit');
+                        return;
+                    }
+                    
+                    // Validate file type
+                    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                    if (!validTypes.includes(file.type)) {
+                        alert('Only JPG, PNG, and WebP formats are allowed');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        preview.innerHTML = '';
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        preview.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
 
-        //open add form-----------------------------------------------
-        const openAddForm_button = document.getElementById("add-button");
-        const FloatingAddForm = document.getElementById("floating-add-form");
-        const CloseAddForm_button = document.getElementById("close-addform-button");
-
-        openAddForm_button.addEventListener('click', () => {
-            FloatingAddForm.style.display = 'flex';
-        });
-
-        CloseAddForm_button.addEventListener('click', () => {
-            FloatingAddForm.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if(event.target === FloatingAddForm){
-                FloatingAddForm.style.display = 'none';
-            }
-        });
-
-        //open add form-----------------------------------------------
-
-        //image for add and edit form-----------------------------------------------
-
+        // Set up both forms
         document.addEventListener('DOMContentLoaded', function() {
-                // For Add Product Form
-                const imageInput = document.getElementById('product-image');
-                if (imageInput) {
-                    imageInput.addEventListener('change', function(e) {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = function(event) {
-                                let preview = document.getElementById('image-preview');
-                                if (!preview) {
-                                    preview = document.createElement('img');
-                                    preview.id = 'image-preview';
-                                    preview.className = 'image-preview';
-                                    imageInput.parentNode.insertBefore(preview, imageInput.nextSibling);
-                                }
-                                preview.src = event.target.result;
-                                preview.style.display = 'block';
-                            }
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                }
-
-                // For Edit Product Form
-                const editImageInput = document.getElementById('edit-product-image');
-                if (editImageInput) {
-                    editImageInput.addEventListener('change', function(e) {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = function(event) {
-                                let preview = document.getElementById('edit-image-preview');
-                                if (!preview) {
-                                    preview = document.createElement('img');
-                                    preview.id = 'edit-image-preview';
-                                    preview.className = 'image-preview';
-                                    editImageInput.parentNode.insertBefore(preview, editImageInput.nextSibling);
-                                }
-                                preview.src = event.target.result;
-                                preview.style.display = 'block';
-                            }
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                }
+            setupImagePreview('floating-add-form', 'image-preview-placeholder', 'product-image');
+            setupImagePreview('floating-edit-form', 'edit-image-preview-placeholder', 'edit-product-image');
+            
+            // Form open/close functionality
+            document.getElementById('add-button').addEventListener('click', () => {
+                document.getElementById('floating-add-form').style.display = 'flex';
             });
 
-        //image for add and edit form-----------------------------------------------
+            document.getElementById('close-addform-button').addEventListener('click', () => {
+                document.getElementById('floating-add-form').style.display = 'none';
+            });
 
-
-        //open edit form----------------------------------------------
-
-            //edit-action-button
-            //delete-action-button
-            const openEditForm_buttont = document.getElementById("table-editaction-button");
-            const openEditForm_button = document.getElementById("edit-action-button");
-            const FloatingEditForm = document.getElementById("floating-edit-form");
-            const CloseEditForm_button = document.getElementById("close-editform-button");
-
-            const Edit_Btns = [openEditForm_buttont, openEditForm_button];
-
-            Edit_Btns.forEach(button => {
-                if(button){
+            const editButtons = [
+                document.getElementById('table-editaction-button'),
+                document.getElementById('edit-action-button')
+            ];
+            
+            editButtons.forEach(button => {
+                if (button) {
                     button.addEventListener('click', () => {
-                        FloatingEditForm.style.display = 'flex';
+                        document.getElementById('floating-edit-form').style.display = 'flex';
                     });
                 }
             });
 
-            CloseEditForm_button.addEventListener('click', () => {
-                FloatingEditForm.style.display = 'none';
+            document.getElementById('close-editform-button').addEventListener('click', () => {
+                document.getElementById('floating-edit-form').style.display = 'none';
             });
 
+            // Close forms when clicking outside
             window.addEventListener('click', (event) => {
-                if(event.target === FloatingEditForm){
-                    FloatingEditForm.style.display = 'none';
-;                }
+                if (event.target === document.getElementById('floating-add-form')) {
+                    document.getElementById('floating-add-form').style.display = 'none';
+                }
+                if (event.target === document.getElementById('floating-edit-form')) {
+                    document.getElementById('floating-edit-form').style.display = 'none';
+                }
             });
-        //open edit form----------------------------------------------
+        });
+        //Image preview------------------------------------------------
+
         
     </script>
 </body>
